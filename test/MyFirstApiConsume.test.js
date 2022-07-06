@@ -13,7 +13,7 @@ describe('First Api Tests', () => {
 
   // Get with Parameters
   it('Consume GET Service with Query Parameters', async () => {
-    config = {
+    const config = {
       id: 3
     };
 
@@ -25,21 +25,21 @@ describe('First Api Tests', () => {
 
   // Head
   it('Consume Head Service', async () => {
-    config = {
+    const config = {
       id: 3
     };
 
     const response = await axios.head('https://httpbin.org', config);
+    expect(response.data.json).to.equal();
     expect(response.status).to.equal(StatusCodes.OK);
-    expect(response.data).to.empty;
   });
 
   // Post
   it('Consume Post Service', async () => {
-    config = {
+    const config = {
       id: 3
     };
-    data = {
+    const data = {
       name: 'luisa',
       age: 22
 
@@ -52,11 +52,11 @@ describe('First Api Tests', () => {
   });
 
   it('Consume Patch Service', async () => {
-    config = {
+    const config = {
       id: 3
     };
 
-    data = {
+    const data = {
       name: 'sofia'
     };
 
@@ -68,7 +68,7 @@ describe('First Api Tests', () => {
   });
 
   it('Consume Put Service', async () => {
-    data = {
+    const data = {
       name: 'maria',
       age: 20
     };
@@ -80,7 +80,7 @@ describe('First Api Tests', () => {
   });
 
   it('Consume Delete Service', async () => {
-    config = {
+    const config = {
       id: 3
     };
 

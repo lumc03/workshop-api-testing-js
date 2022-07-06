@@ -1,7 +1,7 @@
 const { StatusCodes } = require('http-status-codes');
 const { expect } = require('chai');
 const axios = require('axios');
-const dotenv = require('dotenv').config();
+require('dotenv').config();
 
 const urlBase = 'https://api.github.com';
 const githubUserName = 'lumc03';
