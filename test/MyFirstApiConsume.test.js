@@ -15,72 +15,92 @@ describe('First Api Tests', () => {
 
     //Get with Parameters
     it('Consume GET Service with Query Parameters', async () => {
-        const data = {
-            id: '3',
+        config = {
+            id: 3,
         };
 
-        const response = await axios.get('https://httpbin.org/get', data);
+        const response = await axios.get('https://httpbin.org/get', config);
 
         expect(response.status).to.equal(StatusCodes.OK);
-        expect(response.data).to.have.property('origin');
+        expect(response.config.id).to.equal(3);
     });
 
     //Head 
     it('Consume Head Service', async () => {
 
-        const data = {
-            id: '3',
+        config = {
+            id: 3,
         };
-        const response = await axios.head('https://httpbin.org', data);
+
+        const response = await axios.head('https://httpbin.org', config);
 
         expect(response.status).to.equal(StatusCodes.OK);
+        expect(response.data).to.empty;
     });
 
     //Post
     it('Consume Post Service', async () => {
+
         config = {
-            id: '3',
+            id: 3
+        }
+        data = {
             name: 'luisa',
-            age: 22,
+            age: 22
 
         };
 
-        const response = await axios.post('https://httpbin.org/post', config);
+        const response = await axios.post('https://httpbin.org/post', data, config);
 
         expect(response.status).to.equal(StatusCodes.OK);
-        expect(response.data).to.have.property('origin');
+        expect(response.config.id).to.equal(3);
+
 
     });
 
     it('Consume Patch Service', async () => {
-        data = {
-            id: '3',
-        };
 
         config = {
-            name: 'sofia'
+            id: 3,
         }
+
+        data = {
+            name: 'sofia',
+        };
 
         const response = await axios.patch('https://httpbin.org/patch', data, config);
 
         expect(response.status).to.equal(StatusCodes.OK);
-        expect(response.config.name).to.equal("sofia");
+        expect(response.config.id).to.equal(3);
+
     });
 
     it('Consume Put Service', async () => {
-        data = {
-            id: '3',
-        };
 
-        config = {
-            name: 'juana',
-            age: 21,
+        data = {
+            name: 'maria',
+            age: 20
         }
 
-        const response = await axios.put('https://httpbin.org/put', data, config);
 
+        const response = await axios.put('https://httpbin.org/put', data, { id: 3 });
         expect(response.status).to.equal(StatusCodes.OK);
-        expect(response.config.name).to.equal("juana");
-        expect(response.config.age).to.equal(21);
+        expect(response.config.id).to.equal(3);
+
+    });
+
+
+
+    it('Consume Delete Service', async () => {
+
+        config = {
+            id: 3
+        }
+
+
+        const response = await axios.delete('https://httpbin.org/delete', config);
+        expect(response.status).to.equal(StatusCodes.OK);
+        expect(response.config.id).to.equal(3);
+
     });
 });
