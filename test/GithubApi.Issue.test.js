@@ -12,17 +12,18 @@ const urlBase = 'https://api.github.com/user';
 const urlIssue = 'https://api.github.com/repos';
 let selectedRepo;
 let issue;
+let loggedUser;
 
 describe('Consume Post&Patch', () => {
   it('Logged User', async () => {
-    const loggedUser = await instance.get(`${urlBase}`);
+    loggedUser = await instance.get(`${urlBase}`);
 
     expect(loggedUser.status).to.equal(StatusCodes.OK);
     expect(loggedUser.data.public_repos).to.be.greaterThanOrEqual(1);
   });
 
   it('Get a Repository', async () => {
-    const repos = await instance.get(`${urlBase}/repos`);
+    const repos = await instance.get(loggedUser.data.repos_url);
     selectedRepo = repos.data.find((i) => i.name === 'PostmanPerfBootcamp');
 
     expect(repos.status).to.equal(StatusCodes.OK);
