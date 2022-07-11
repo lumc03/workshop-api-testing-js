@@ -8,6 +8,7 @@ const instance = axios.create({
   }
 });
 const urlBase = 'https://api.github.com/user/following';
+let userFollowed;
 
 describe('Consume Put Method', () => {
   // Get
@@ -21,7 +22,7 @@ describe('Consume Put Method', () => {
   it('Following Check', async () => {
     const response = await instance.get(`${urlBase}`);
 
-    const userFollowed = response.data.find((i) => i.login === 'aperdomob');
+    userFollowed = response.data.find((i) => i.login === 'aperdomob');
 
     expect(response.status).to.equal(StatusCodes.OK);
     expect(userFollowed.login).to.equal('aperdomob');
@@ -32,5 +33,6 @@ describe('Consume Put Method', () => {
 
     expect(response.status).to.equal(StatusCodes.NO_CONTENT);
     expect(response.data).to.equal('');
+    expect(userFollowed.login).to.equal('aperdomob');
   });
 });
