@@ -29,9 +29,11 @@ const gist = {
 };
 
 describe('Create and Delete a Gist', () => {
-  it('Create a Gist', async () => {
+  before(async () => {
     createdGist = await instance.post(`${urlBase}`, gist);
+  });
 
+  it('Create a Gist', async () => {
     expect(createdGist.status).to.equal(StatusCodes.CREATED);
     expect(createdGist.data.description).to.equal(gist.description);
     expect(createdGist.data.public).to.equal(gist.public);
