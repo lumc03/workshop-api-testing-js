@@ -11,7 +11,6 @@ const urlBase = 'https://api.github.com/user/following';
 let userFollowed;
 
 describe('Consume Put Method', () => {
-  // Get
   it('Follow a user service', async () => {
     const response = await instance.put(`${urlBase}/aperdomob`);
 
@@ -33,6 +32,14 @@ describe('Consume Put Method', () => {
 
     expect(response.status).to.equal(StatusCodes.NO_CONTENT);
     expect(response.data).to.equal('');
+  });
+
+  it('Still following user', async () => {
+    const response = await instance.get(`${urlBase}`);
+
+    userFollowed = response.data.find((i) => i.login === 'aperdomob');
+
+    expect(response.status).to.equal(StatusCodes.OK);
     expect(userFollowed.login).to.equal('aperdomob');
   });
 });
